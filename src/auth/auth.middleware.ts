@@ -4,16 +4,17 @@ import * as jwt from 'jsonwebtoken';
 export class AuthMiddleware implements NestMiddleware {
   use(req: any, res: any, next: () => void) {
     if (!req.headers.authorization) {
-      console.log('you are not auth');
-      return false;
+      return res.send('you are not authentication')
+
     } else {
       let token = req.headers.authorization;
       try {
         jwt.verify(token, process.env.SECRET_KEY);
         console.log('Sukses');
-        next();
+       return next();
       } catch (err) {
-        console.log('invalid token');
+        return res.status(401).json('you are not Token')
+
       }
     }
   }
