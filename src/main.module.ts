@@ -5,6 +5,13 @@ import { AppService } from './service/app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RegionsModule } from './Module/regions.module';
 import { LoginController } from './controller/AuthController/login.controller';
+import { UsersService } from './service/users.service';
+import { UsersController } from './controller/users/users.controller';
+import { LoginService } from './service/login.service';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './Module/users/users.module';
+import { AuthController } from './auth/auth.controller';
+import { AuthService } from './auth/auth.service';
 
 @Module({
   imports: [
@@ -19,8 +26,10 @@ import { LoginController } from './controller/AuthController/login.controller';
       synchronize: false,
     }),
     RegionsModule,
+    AuthModule,
+    UsersModule
   ],
-  controllers: [AppController, LoginController],
-  providers: [AppService],
+  controllers: [AppController ],
+  providers: [AppService ],
 })
 export class MainModule {}
